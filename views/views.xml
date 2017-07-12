@@ -6,6 +6,7 @@
       <field name="model">todo.task</field>
       <field name="inherit_id" ref="todo_app.view_form_todo_task" />
       <field name="arch" type="xml">
+        
         <field name="name" position="after">
           <field name="user_id" />
         </field>
@@ -16,6 +17,13 @@
         <field name="active" position="attributes">
           <attribute name="invisible">1</attribute>
         </field>
+
+        <sheet position="after">
+          <div class="oe_chatter">
+            <field name="message_follower_ids" widget="mail_followers" />
+            <field name="message_ids" widget="mail_thread" />
+          </div>
+        </sheet>
       </field>
     </record>
 
@@ -43,7 +51,7 @@
         </field>
       </field>
     </record>
-    
+
 
 
   </data>
