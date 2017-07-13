@@ -34,5 +34,6 @@
     # only loaded in demonstration mode
     'demo': [
         'demo/demo.xml',
+        'security/todo.task.csv'
     ],
 }
