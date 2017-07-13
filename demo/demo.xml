@@ -2,22 +2,22 @@
     <data>
         <record model="todo.task" id="todo_task_c">
             <field name="name">Reinstall Odoo</field>
-            <field name="user_id" ref="base.user_root" />
-            <field name="date_deadline">2017-07-23</field>
+            <field name="user_id" eval ="ref('base.group_user')" />
+            
             <field name="is_done" eval="False"/>
         </record>
 
         <record model="todo.task" id="todo_task_d">
             <field name="name">Create Database</field>
-            <field name="user_id" ref="base.user_root" />
-            <field name="date_deadline">2017-07-23</field>
+            <field name="user_id" ref="base.group_user" />
+            
             <field name="is_done" eval="False"/>
         </record>
 
         <record model="todo.task" id="todo_task_d">
             <field name="name">User Documenation</field>
-            <field name="user_id" ref="base.user_root" />
-            <field name="date_deadline">2017-07-23</field>
+            <field name="user_id" ref="base.group_user" />
+            
             <field name="is_done" eval="False"/>
         </record>
     </data>

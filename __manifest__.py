@@ -4,6 +4,8 @@
 
     'summary': """
             Extend  the To-Do   app to  multiuser.
+            User    friendly    features.
+
         """,
 
     'description': """
@@ -11,6 +13,7 @@
         tasks.  Won't   it  be  great   to  take    the app to  another level   by  adding  collaboration
         and social  networking  features    to  it, we  will    be  able    to  share   tasks   and discuss
         them    with    other   people.
+        User    interface   improvements    to  the To-Do   app
     """,
 
     'author': "OTB Africa",
