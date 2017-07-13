@@ -11,7 +11,7 @@ class TodoTask(models.Model):
 	name = fields.Char(help="What needs to be done?")
 	stage_id = fields.Many2one('todo.task.stage','Stage')
 	tag_ids = fields.Many2many('todo.task.tag',string='Tags')
-
+	# refers_to = fields.Reference([('res.user','User'),('res.partner','Partner')],'Refers to')
 	@api.multi
 	def do_clear_done(self):
 		domain = [('is_done','=', True),
@@ -37,9 +37,10 @@ class Tag(models.Model):
 	name = fields.Char('Name',size=40,translate=True)
 	task_ids = fields.Many2many('todo.task',"Tags")
 
-	parent_id = fieldsMany2one('task.task.tag','Parent Tag', ondelete='restrict')
+	parent_id = fields.Many2one('task.task.tag','Parent Tag', ondelete='restrict')
 	parent_left = fields.Integer('Parent Left', index=True)
 	parent_right = fields.Integer('Parent Right', index=True)
+	child_ids = fields.One2many('todo.task.tag','parent_id','Child Tags')
 
 
 
