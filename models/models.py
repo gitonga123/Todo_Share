@@ -33,9 +33,13 @@ class TodoTask(models.Model):
 class Tag(models.Model):
 	_name = 'todo.task.tag'
 	_description= 'To-do Tag'
+	_parent_store = True
 	name = fields.Char('Name',size=40,translate=True)
 	task_ids = fields.Many2many('todo.task',"Tags")
-	
+
+	parent_id = fieldsMany2one('task.task.tag','Parent Tag', ondelete='restrict')
+	parent_left = fields.Integer('Parent Left', index=True)
+	parent_right = fields.Integer('Parent Right', index=True)
 
 
 
