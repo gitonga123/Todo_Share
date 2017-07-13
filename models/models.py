@@ -11,7 +11,16 @@ class TodoTask(models.Model):
 	name = fields.Char(help="What needs to be done?")
 	stage_id = fields.Many2one('todo.task.stage','Stage')
 	tag_ids = fields.Many2many('todo.task.tag',string='Tags')
+	stage_state = fields.Selection(related='stage_id.state',string='Stage State')
+	_sql_constraints = [('todo_task_name_uniq','UNIQUE(name, active)','Task Title Must be Unqiue')]
 	# refers_to = fields.Reference([('res.user','User'),('res.partner','Partner')],'Refers to')
+		
+	@api.constrains('name')
+	def _check_name_size(self):
+		for todo in self:
+			if len(todo.name) < 5:
+				raise ValidationError('Must have 5 Chars!')
+
 	@api.multi
 	def do_clear_done(self):
 		domain = [('is_done','=', True),
@@ -60,5 +69,20 @@ class stage(models.Model):
 	date_effective = fields.Date('Effective Date')
 	date_changed = fields.Datetime('Last Changed')
 	fold = fields.Boolean('Folded?')
+	stage_fold = fields.Boolean('Stage Folded?', compute='_compute_stage_fold',search='_search_stage_fold',inverse='_write_stage_fold')
 	image = fields.Binary('Image')
 	task_ids = fields.One2many('todo.task','stage_id',string="Tasks in this Stage")
+
+
+	@api.depends('fold')
+	def _compute_stage_fold(self):
+		for task in self:
+			task.stage_fold = task.fold
+
+
+	def _search_stage_fold(self,operator,value):
+		return [('fold',operator,value)]
+
+	def _write_stage_fold(self):
+		self.fold = self.stage_fold
+	
