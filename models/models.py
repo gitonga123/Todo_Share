@@ -5,7 +5,7 @@ from odoo.exceptions import ValidationError
 
 
 class TodoTask(models.Model):
-	_inherit = ['todo.task','mail.thread']
+	_inherit = ['todo.task']
 	user_id = fields.Many2one('res.users','Responsible')
 	date_deadline = fields.Date('Deadline')
 	name = fields.Char(help="What needs to be done?")
